@@ -91,64 +91,57 @@ The server will start on the port specified in the `config.env` file.
 
 ### API Endpoints
 
-- **/api/auth/register** `POST` – Register a new user.
-- **/api/auth/login** `POST` – Login an existing user.
-- **/api/projects** `GET` – Get a list of projects.
-- **/api/projects** `POST` – Add a new project (supports image uploads).
-- **/api/skills** `GET` – Get a list of skills.
-- **/api/skills** `POST` – Add a new skill.
-- **/api/contact** `POST` – Send a message via the contact form.
-
-Message Routes
-- `POST` /api/v1/message/send – Send a message.
-- `GET` /api/v1/message/getAll – Get all messages.
-- `DELETE` /api/v1/message/delete/:id – Delete a message (authentication required).
+#### Message Routes
+- `POST` **/api/v1/message/send** – Send a message.
+- `GET` **/api/v1/message/getAll** – Get all messages.
+- `DELETE` **/api/v1/message/delete/:id** – Delete a message (authentication required).
   
-User Routes
-- `POST` /api/v1/user/register – Register a new user.
-- `POST` /api/v1/user/login – Log in a user.
-- `GET` /api/v1/user/logout – Log out the current user (authentication required).
-- `GET` /api/v1/user/profile – Get user profile (authentication required).
-- `GET` /api/v1/user/profile/portfolio – Get user profile for the portfolio.
-- `PUT` /api/v1/user/update/profile – Update user profile (authentication required).
-- `PUT` /api/v1/user/update/password – Update user password (authentication required).
-- `POST` /api/v1/user/password/forgot – Request password reset.
-- `PUT` /api/v1/user/password/reset/:token – Reset password with a token.
+#### User Routes
+- `POST` **/api/v1/user/register** – Register a new user.
+- `POST` **/api/v1/user/login** – Log in a user.
+- `GET` **/api/v1/user/logout** – Log out the current user (authentication required).
+- `GET` **/api/v1/user/profile** – Get user profile (authentication required).
+- `GET` **/api/v1/user/profile/portfolio** – Get user profile for the portfolio.
+- `PUT` **/api/v1/user/update/profile** – Update user profile (authentication required).
+- `PUT` **/api/v1/user/update/password** – Update user password (authentication required).
+- `POST` **/api/v1/user/password/forgot** – Request password reset.
+- `PUT` **/api/v1/user/password/reset/:token** – Reset password with a token.
 
-Timeline Routes
-- `POST` /api/v1/timeline/add – Add a new timeline event (authentication required).
-- `DELETE` /api/v1/timeline/delete/:id – Delete a timeline event (authentication required).
-- `GET` /api/v1/timeline/getAll – Get all timeline events.
+#### Timeline Routes
+- `POST` **/api/v1/timeline/add** – Add a new timeline event (authentication required).
+- `DELETE` **/api/v1/timeline/delete/:id** – Delete a timeline event (authentication required).
+- `GET` **/api/v1/timeline/getAll** – Get all timeline events.
 
-Software App Routes
-- `POST` /api/v1/software/add – Add a new software app (authentication required).
-- `DELETE` /api/v1/software/delete/:id – Delete a software app (authentication required).
-- `GET` /api/v1/software/getAll – Get all software apps.
+#### Software App Routes
+- `POST` **/api/v1/software/add** – Add a new software app (authentication required).
+- `DELETE` **/api/v1/software/delete/:id** – Delete a software app (authentication required).
+- `GET` **/api/v1/software/getAll** – Get all software apps.
 
-Skill Routes
-- `POST` /api/v1/skill/add – Add a new skill (authentication required).
-- `DELETE` /api/v1/skill/delete/:id – Delete a skill (authentication required).
-- `PUT` /api/v1/skill/update/:id – Update a skill (authentication required).
-- `GET` /api/v1/skill/getAll – Get all skills.
+#### Skill Routes
+- `POST` **/api/v1/skill/add** – Add a new skill (authentication required).
+- `DELETE` **/api/v1/skill/delete/:id** – Delete a skill (authentication required).
+- `PUT` **/api/v1/skill/update/:id** – Update a skill (authentication required).
+- `GET` **/api/v1/skill/getAll** – Get all skills.
 
-Project Routes
-- `POST` /api/v1/project/add – Add a new project (authentication required).
-- `DELETE` /api/v1/project/delete/:id – Delete a project (authentication required).
-- `PUT` /api/v1/project/update/:id – Update a project (authentication required).
-- `GET` /api/v1/project/getAll – Get all projects.
-- `GET` /api/v1/project/:id – Get a single project.
+#### Project Routes
+- `POST` **/api/v1/project/add** – Add a new project (authentication required).
+- `DELETE` **/api/v1/project/delete/:id** – Delete a project (authentication required).
+- `PUT` **/api/v1/project/update/:id** – Update a project (authentication required).
+- `GET` **/api/v1/project/getAll** – Get all projects.
+- `GET` **/api/v1/project/:id** – Get a single project.
 
 ### Folder Structure
 
 ```bash
-portfolio-backend/
+backend/
+├── config/             # Environment variables
 ├── controllers/        # Handle the logic for each endpoint
+├── database/           # Handle the logic for DB
+├── middleware/         # Custom middleware functions like authentication
 ├── models/             # Mongoose schemas and models
 ├── routes/             # API routes definitions
-├── middleware/         # Custom middleware functions like authentication
-├── config/             # Configuration files (e.g., db connection, cloudinary config)
 ├── utils/              # Utility functions (e.g., email handling)
-├── .env                # Environment variables
+├── app.js              # setup
 └── server.js           # Main entry point
 ```
 
