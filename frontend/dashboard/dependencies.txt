@@ -1,0 +1,3 @@
+npm i react-redux @reduxjs/toolkit axios react-router-dom react-toastify
+
+npx shadcn-ui@latest add dropdown-menu label progress select separator slider slot tabs tooltip button input
