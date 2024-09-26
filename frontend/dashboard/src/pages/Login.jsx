@@ -85,9 +85,9 @@ export default function Login() {
       </div>
       <div className="hidden bg-muted lg:block">
         <img
-          src="/placeholder.svg"
           alt="Image"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          src="./images/loginLeft.svg"
         />
       </div>
     </div>
