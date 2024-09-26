@@ -89,8 +89,7 @@ userSchema.methods.getResetPasswordToken = function () {
     .update(resetToken)
     .digest("hex");
 
-  this.resetPassExpire = Date.now() + 900000;
-  // this.resetPassExpire = Date.now() + process.env.PASSWORD_EXPIRE;
+  this.resetPassExpire = Date.now() + parseInt(process.env.PASSWORD_EXPIRE);
   return resetToken;
 };
 
