@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const passwordSlice = createSlice({
-  name: "forgotPassword",
+  name: "password",
   initialState: {
     loading: false,
     error: null,

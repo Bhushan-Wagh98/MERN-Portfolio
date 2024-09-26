@@ -6,26 +6,33 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  // const dispatch = useDispatch();
-  // const { message, error } = useDispatch((state) => state.user);
-  // // const navigateTo = useNavigate();
+  const dispatch = useDispatch();
+  // const { isAuthenticated, message, error, loading } = useDispatch(
+  //   (state) => state.user
+  // );
 
-  // const handleLogout = () => {
-  //   dispatch(logout());
-  // };
+  // const navigateTo = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //     dispatch(clearAllUserErrors());
+  // if (error) {
+  //   toast.error(error);
+  //   dispatch(clearAllUserErrors());
+  // }
+  // if (message) {
+  //   toast.success(message);
+  // }
+
+  //   if (!isAuthenticated) {
+  //     navigateTo("/login");
   //   }
-  //   if (message) {
-  //     toast.success(message);
-  //   }
-  // }, [message, dispatch, error]);
+  // }, [dispatch]);
   return (
     <div>
-      {/* <Button onClick={handleLogout}>Logout</Button> */}
+      <Button onClick={handleLogout}>Logout</Button>
       HomePage
     </div>
   );

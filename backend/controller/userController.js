@@ -5,6 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { generateToken } from "../utils/jwtToken.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from "crypto";
+import resetPassHtml from "../emailTemplate/resetPassword.js";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -236,6 +237,10 @@ export const getUserForPortfolio = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  if (!req.body.email) {
+    return next(new ErrorHandler("Email required!", 400));
+  }
+
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -248,13 +253,11 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   const resetPassUrl = `${process.env.DASHBOARD_URL}/password/reset/${resetToken}`;
 
-  const message = `Your Reset Password token is: \n\n${resetPassUrl} \n\nIf you have not requested this, pls ignore.`;
-
   try {
     await sendEmail({
       email: user.email,
       subject: "Personal Portfolio Dashboard Recovery Password",
-      message,
+      message: resetPassHtml(resetPassUrl),
     });
 
     res.status(200).json({
@@ -270,6 +273,18 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const resetPassword = catchAsyncErrors(async (req, res, next) => {
+  if (!req.body.password || !req.body.confirmPassword) {
+    return next(
+      new ErrorHandler("Password and Confirm Password required!", 400)
+    );
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(
+      new ErrorHandler("Password and Confirm Password do not match!", 400)
+    );
+  }
+
   const { token } = req.params;
 
   const resetPassToken = crypto
@@ -285,12 +300,6 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
   if (!user) {
     return next(
       new ErrorHandler("Reset Password token has been expired!", 400)
-    );
-  }
-
-  if (req.body.password !== req.body.confirmPassword) {
-    return next(
-      new ErrorHandler("Password and Confirm Password do not match!")
     );
   }
 
