@@ -10,6 +10,7 @@ import {
   resetPassword,
 } from "../store/slices/passwordSlice";
 import { toast } from "react-toastify";
+import { getUser } from "../store/slices/userSlice";
 
 const ResetPass = () => {
   const [password, setPassword] = useState("");
@@ -36,6 +37,7 @@ const ResetPass = () => {
 
     if (message !== null) {
       toast.success(message);
+      dispatch(getUser());
     }
   }, [isAuthenticated, dispatch, error, loading]);
   return (

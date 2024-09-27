@@ -12,9 +12,9 @@ export const description =
   "A login page with two columns. The first column has the login form with email and password. There's a Forgot your passwork link and a link to sign up if you do not have an account. The second column has a cover image.";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { loading, isAuthenticated, error } = useSelector(
+  const [email, setEmail] = useState("wagh.bhushan.998@gmail.com");
+  const [password, setPassword] = useState("Pass@123");
+  const { loading, isAuthenticated, error, message } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (error) {
+    if (error && error !== "User not authenticated!") {
       toast.error(error);
       dispatch(clearAllUserErrors());
     }
@@ -33,7 +33,7 @@ export default function Login() {
     if (isAuthenticated) {
       navigateTo("/");
     }
-  }, [dispatch, isAuthenticated, error, loading]);
+  }, [dispatch, isAuthenticated, error, loading, message]);
   return (
     <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
       <div className="min-h-[100vh] flex items-center justify-center py-12">
@@ -85,6 +85,7 @@ export default function Login() {
       </div>
       <div className="hidden bg-muted lg:block">
         <img
+          // style={{ height: "87%" }}
           alt="Image"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
           src="./images/loginLeft.svg"

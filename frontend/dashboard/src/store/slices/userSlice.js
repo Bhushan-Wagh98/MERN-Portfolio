@@ -21,8 +21,9 @@ const userSlice = createSlice({
     loginSuccess(state, action) {
       state.loading = false;
       state.isAuthenticated = true;
-      state.user = action.payload;
+      state.user = action.payload.user;
       state.error = null;
+      state.message = action.payload.message;
     },
     loginFailed(state, action) {
       state.loading = false;
@@ -126,7 +127,9 @@ export const login = (email, password) => async (dispatch) => {
       }
     );
 
-    dispatch(userSlice.actions.loginSuccess(data.user));
+    dispatch(
+      userSlice.actions.loginSuccess({ message: data.message, user: data.user })
+    );
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(userSlice.actions.loginFailed(error.response.data.message));
