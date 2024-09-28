@@ -13,7 +13,7 @@ export const description =
 
 export default function Login() {
   const [email, setEmail] = useState("wagh.bhushan.998@gmail.com");
-  const [password, setPassword] = useState("Pass@123");
+  const [password, setPassword] = useState("Pass@1234");
   const { loading, isAuthenticated, error, message } = useSelector(
     (state) => state.user
   );
@@ -56,15 +56,7 @@ export default function Login() {
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  to={"/password/forgot"}
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
+              <Label htmlFor="password">Password</Label>
               <Input
                 value={password}
                 placeholder="Password"
@@ -72,6 +64,12 @@ export default function Login() {
                 type="password"
                 required
               />
+              <Link
+                to={"/password/forgot"}
+                className="ml-auto inline-block text-sm underline"
+              >
+                Forgot your password?
+              </Link>
             </div>
             {loading ? (
               <SpecialLoadingButton content="Logging in" />

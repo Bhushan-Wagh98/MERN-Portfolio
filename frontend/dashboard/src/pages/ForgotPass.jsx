@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import SpecialLoadingButton from "./subComponents/SpecialLoadingButton";
 
 const ForgotPass = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("wagh.bhushan.998@gmail.com");
   const { loading, error, message } = useSelector((state) => state.password);
   const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();

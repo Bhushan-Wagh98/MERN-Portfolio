@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import SpecialLoadingButton from "./subComponents/SpecialLoadingButton";
 import {
   clearAllPassErrors,
@@ -73,6 +73,13 @@ const ResetPass = () => {
                   required
                 />
               </div>
+
+              <Link
+                to={"/login"}
+                className="ml-auto inline-block text-sm underline"
+              >
+                Login with password!
+              </Link>
 
               {loading ? (
                 <SpecialLoadingButton content="Resetting Password" />

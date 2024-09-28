@@ -218,6 +218,10 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Incorrect password!", 400));
   }
 
+  if (currentPassword === newPassword) {
+    return ErrorHandler("New password is same as old password!", 500);
+  }
+
   user.password = newPassword;
   await user.save();
   res.status(200).json({
@@ -295,7 +299,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({
     resetPassToken,
     resetPassExpire: { $gt: Date.now() },
-  });
+  }).select("+password");
 
   if (!user) {
     return next(
@@ -303,10 +307,20 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
     );
   }
 
+  const isPasswordMatch = await user.comparePassword(req.body.password);
+
+  if (isPasswordMatch) {
+    return next(new ErrorHandler("New password is same as old password!", 500));
+  }
+
   user.password = req.body.password;
   user.resetPassExpire = undefined;
   user.resetPassToken = undefined;
 
   await user.save();
-  generateToken(user, "Password Reset Successfully!", 200, res);
+  return res.status(200).json({
+    success: true,
+    message: "Password Reset Successfully!",
+  });
+  // generateToken(user, "Password Reset Successfully!", 200, res);
 });
