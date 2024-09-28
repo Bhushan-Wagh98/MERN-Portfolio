@@ -62,7 +62,7 @@ const HomePage = () => {
   return (
     <>
       <div className="flex min-h-screen w-full flex-col bg-muted/40">
-        <aside className="fixed  inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50">
+        <aside className="fixed inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50">
           <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
             <Link className="group flex h-p w-p shrink-0 items-center justify-center gap-2 rounded-full">
               <Package className="h-4 w-4 transition-all group-hover:scale-110" />
@@ -250,8 +250,8 @@ const HomePage = () => {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-wx">
-              <SheetHeader className="mt-5 mb-10">
+            <SheetContent side="left" className="sm:max-w-wx overflow-y-auto">
+              <SheetHeader className="mt-3 mb-6">
                 <SheetTitle>Hello {user?.fullName}</SheetTitle>
                 <SheetDescription>
                   Manage your portfolio from here.
