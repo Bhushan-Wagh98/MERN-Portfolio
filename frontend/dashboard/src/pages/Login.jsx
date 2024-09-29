@@ -13,7 +13,7 @@ export const description =
 
 export default function Login() {
   const [email, setEmail] = useState("wagh.bhushan.998@gmail.com");
-  const [password, setPassword] = useState("Pass@1234");
+  const [password, setPassword] = useState("Pass@123");
   const { loading, isAuthenticated, error, message } = useSelector(
     (state) => state.user
   );
@@ -81,12 +81,11 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block">
+      <div className="hidden bg-muted lg:flex justify-center items-center">
         <img
-          // style={{ height: "87%" }}
-          alt="Image"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-          src="./images/loginLeft.svg"
+          alt="Login image"
+          className="h-auto w-[87%] object-cover dark:brightness-[0.2] dark:grayscale"
+          src="/images/loginLeft.svg"
         />
       </div>
     </div>

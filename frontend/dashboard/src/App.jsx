@@ -36,7 +36,14 @@ function App() {
         <Route path="/update/project/:id" element={<UpdateProject />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      <ToastContainer position="bottom-right" pauseOnHover theme="dark" />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={true}
+        pauseOnHover={false}
+        theme="light"
+        closeButton={false}
+      />
     </BrowserRouter>
   );
 }

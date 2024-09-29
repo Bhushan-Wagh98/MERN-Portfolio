@@ -64,7 +64,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
 
   const user = await User.create({
     fullName,
-    email,
+    email: email.toLowerCase(),
     phone,
     aboutMe,
     password,
@@ -95,7 +95,9 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Email and Password are required!"));
   }
 
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findOne({ email: email.toLowerCase() }).select(
+    "+password"
+  );
 
   if (!user) {
     return next(new ErrorHandler("Invalid Email or Password!"));
@@ -135,7 +137,7 @@ export const getUser = catchAsyncErrors(async (req, res, next) => {
 export const updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
     fullName: req.body.fullName,
-    email: req.body.email,
+    email: req.body.email.toLowerCase(),
     phone: req.body.phone,
     aboutMe: req.body.aboutMe,
     portfolioURL: req.body.portfolioURL,
@@ -245,7 +247,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Email required!", 400));
   }
 
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ email: req.body.email.toLowerCase() });
 
   if (!user) {
     return next(new ErrorHandler("User not found!", 400));
