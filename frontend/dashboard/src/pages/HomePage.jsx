@@ -26,6 +26,13 @@ import {
 import { Button } from "@/components/ui/button";
 import TooltipComp from "./subComponents/TooltipComp";
 import SidebarItems from "./subComponents/SidebarItems";
+import Dashboard from "./subComponents/Dashboard";
+import AddProject from "./subComponents/AddProject";
+import AddSkills from "./subComponents/AddSkills";
+import AddApplications from "./subComponents/AddApplications";
+import AddTimeline from "./subComponents/AddTimeline";
+import Messages from "./subComponents/Messages";
+import Account from "./subComponents/Account";
 
 const HomePage = () => {
   const [active, setActive] = useState("Dashboard");
@@ -67,10 +74,10 @@ const HomePage = () => {
   return (
     <>
       <div className="flex min-h-screen w-full flex-col bg-muted/40">
-        <aside className="fixed inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50">
+        <aside className="fixed inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50 overflow-y-auto">
           <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
             <Link className="group flex h-p w-p shrink-0 items-center justify-center gap-2 rounded-full">
-              <Package className="h-4 w-4 transition-all group-hover:scale-110" />
+              <Package className="h-6 w-6 transition-all group-hover:scale-110" />
               <span className="sr-only">Dashboard</span>
             </Link>
 
@@ -151,6 +158,42 @@ const HomePage = () => {
             </h2>
           </div>
         </header>
+
+        {(() => {
+          switch (active) {
+            case contentArr[0].content:
+              return <Dashboard />;
+              break;
+
+            case contentArr[1].content:
+              return <AddProject />;
+              break;
+
+            case contentArr[2].content:
+              return <AddSkills />;
+              break;
+
+            case contentArr[3].content:
+              return <AddApplications />;
+              break;
+
+            case contentArr[4].content:
+              return <AddTimeline />;
+              break;
+
+            case contentArr[5].content:
+              return <Messages />;
+              break;
+
+            case contentArr[6].content:
+              return <Account />;
+              break;
+
+            default:
+              return <Dashboard />;
+              break;
+          }
+        })()}
       </div>
     </>
   );
