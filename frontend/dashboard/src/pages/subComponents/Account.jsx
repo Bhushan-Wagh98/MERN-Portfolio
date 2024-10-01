@@ -17,6 +17,7 @@ const Account = () => {
             className="grid gap-4 text-sm text-muted-foreground"
             // x-chunk="dashboard-04-chunk-0"
           >
+            {/* try to add this in component */}
             <Link
               href="#"
               className={
@@ -24,6 +25,7 @@ const Account = () => {
                   ? "font-semibold text-primary"
                   : ""
               }
+              onClick={() => setSelectedComponent("Profile")}
             >
               Profile
             </Link>
@@ -35,6 +37,7 @@ const Account = () => {
                   ? "font-semibold text-primary"
                   : ""
               }
+              onClick={() => setSelectedComponent("Update Profile")}
             >
               Update Profile
             </Link>
@@ -46,6 +49,7 @@ const Account = () => {
                   ? "font-semibold text-primary"
                   : ""
               }
+              onClick={() => setSelectedComponent("Update Password")}
             >
               Update Password
             </Link>

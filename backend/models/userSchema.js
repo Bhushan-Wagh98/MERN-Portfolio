@@ -57,6 +57,7 @@ const userSchema = new mongoose.Schema({
   githubURL: String,
   instaURL: String,
   fbURL: String,
+  twitterURL: String,
   hackerRankURL: String,
   resetPassToken: String,
   resetPassExpire: Date,

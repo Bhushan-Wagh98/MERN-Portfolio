@@ -15,6 +15,7 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/slices/userSlice";
+import Profile from "./pages/subComponents/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/manage/projects" element={<MangeProjects />} />
         <Route path="/view/project/:id" element={<ViewProject />} />
         <Route path="/update/project/:id" element={<UpdateProject />} />
+        {/* <Route path="/account" element={<Profile />} /> */}
         <Route path="*" element={<Error />} />
       </Routes>
       <ToastContainer
