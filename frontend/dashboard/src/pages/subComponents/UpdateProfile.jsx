@@ -1,8 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import SpecialLoadingButton from "./SpecialLoadingButton";
 
 const UpdateProfile = () => {
   const { user, loading, error, isUpdated, message } = useSelector(
@@ -23,7 +26,9 @@ const UpdateProfile = () => {
   const [avatarPreview, setAvatarPreview] = useState(user?.avatar?.url);
   const [resume, setResume] = useState(user?.resume?.url);
   const [resumePreview, setResumePreview] = useState(user?.resume?.url);
+  const [update, setUpdate] = useState(true);
   const dispatch = useDispatch();
+
   const avatarHandler = (e) => {
     const file = e.target.files[0];
     console.log(file);
@@ -46,6 +51,46 @@ const UpdateProfile = () => {
     };
   };
 
+  const handleUpdate = () => {
+    console.log("clicked");
+  };
+
+  useEffect(() => {
+    if (
+      fullName === user.fullName &&
+      email === user.email &&
+      phone === user.phone &&
+      aboutMe === user.aboutMe &&
+      portfolioURL === user.portfolioURL &&
+      linkedInURL === user.linkedInURL &&
+      githubURL === user.githubURL &&
+      instagramURL === user.instaURL &&
+      fbURL === user.fbURL &&
+      twitterURL === user.twitterURL &&
+      hackerRankURL === user.hackerRankURL &&
+      avatar === user.avatar.url &&
+      resume === user.resume.url
+    ) {
+      setUpdate(true);
+    } else {
+      setUpdate(false);
+    }
+  }, [
+    fullName,
+    email,
+    phone,
+    aboutMe,
+    portfolioURL,
+    linkedInURL,
+    githubURL,
+    instagramURL,
+    fbURL,
+    twitterURL,
+    hackerRankURL,
+    avatar,
+    resume,
+  ]);
+
   return (
     <>
       <div className="w-full h-full">
@@ -61,7 +106,7 @@ const UpdateProfile = () => {
               <div className="flex flex-col gap-2 w-full sm:w-72 mb-5 box-border">
                 <Label>Profile Picture</Label>
                 <img
-                  src={avatar}
+                  src={avatarPreview || "/Error.svg"}
                   alt="Avatar"
                   className="w-full h-auto sm:w-72 rounded-2xl"
                 />
@@ -72,58 +117,126 @@ const UpdateProfile = () => {
                 />
               </div>
 
-              <div className="grid gap-2 w-full sm:w-72 mb-5">
+              <div className="flex flex-col gap-2 w-full sm:w-72 mb-5 box-border">
                 <Label>Resume</Label>
-                <img
-                  src={resume}
-                  alt="Resume"
-                  className="w-full h-auto sm:w-72 rounded-2xl"
+                <Link target="_blank" to={user?.resume?.url}>
+                  <img
+                    src={resumePreview || "/Error.svg"}
+                    alt="Resume"
+                    className="w-full h-auto sm:w-72 rounded-2xl"
+                  />
+                </Link>
+                <input
+                  type="file"
+                  className="avtr-updt-btn"
+                  onChange={resumeHandler}
                 />
               </div>
             </div>
             <div className="grid gap-2">
               <Label>Full Name</Label>
-              <Input type="text" defaultValue={fullName} />
+              <Input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Your full name"
+              />
             </div>
             <div className="grid gap-2">
               <Label>Email</Label>
-              <Input type="text" defaultValue={email} />
+              <Input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+              />
             </div>
             <div className="grid gap-2">
               <Label>Phone</Label>
-              <Input type="text" defaultValue={phone} />
+              <Input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Your phone"
+              />
             </div>
             <div className="grid gap-2">
               <Label>About me</Label>
-              <Textarea defaultValue={aboutMe} />
+              <Textarea
+                value={aboutMe}
+                onChange={(e) => setAboutMe(e.target.value)}
+                placeholder="About you"
+              />
             </div>
             <div className="grid gap-2">
               <Label>Portfolio URL</Label>
-              <Input defaultValue={portfolioURL} />
+              <Input
+                value={portfolioURL}
+                onChange={(e) => setPortfolioURL(e.target.value)}
+                placeholder="Your portfolio URL"
+              />
             </div>
             <div className="grid gap-2">
               <Label>LinkedIn URL</Label>
-              <Input defaultValue={linkedInURL} />
+              <Input
+                value={linkedInURL}
+                onChange={(e) => setLinkedInURL(e.target.value)}
+                placeholder="Your LinkedIn URL"
+              />
             </div>
             <div className="grid gap-2">
               <Label>GitHub URL</Label>
-              <Input defaultValue={githubURL} />
+              <Input
+                value={githubURL}
+                onChange={(e) => setGithubURL(e.target.value)}
+                placeholder="Your GitHub URL"
+              />
             </div>
             <div className="grid gap-2">
               <Label>Instagram URL</Label>
-              <Input defaultValue={instagramURL} />
+              <Input
+                value={instagramURL}
+                onChange={(e) => setInstagramURL(e.target.value)}
+                placeholder="Your Instagram URL"
+              />
             </div>
             <div className="grid gap-2">
               <Label>Facebook URL</Label>
-              <Input defaultValue={fbURL} />
+              <Input
+                value={fbURL}
+                onChange={(e) => setFbURL(e.target.value)}
+                placeholder="Your Facebook URL"
+              />
             </div>
             <div className="grid gap-2">
               <Label>Twitter (X) URL</Label>
-              <Input defaultValue={twitterURL} />
+              <Input
+                value={twitterURL}
+                onChange={(e) => setTwitterURL(e.target.value)}
+                placeholder="Your Twitter (X) URL"
+              />
             </div>
             <div className="grid gap-2">
               <Label>HackerRank URL</Label>
-              <Input defaultValue={hackerRankURL} />
+              <Input
+                value={hackerRankURL}
+                onChange={(e) => setHackerRankURL(e.target.value)}
+                placeholder="Your HackerRank URL"
+              />
+            </div>
+
+            <div className={`grid gap-2`}>
+              {!loading ? (
+                <Button
+                  className={`cursor-${update ? "not-allowed" : "pointer"}`}
+                  disabled={update}
+                  onClick={handleUpdate}
+                >
+                  Update Profile
+                </Button>
+              ) : (
+                <SpecialLoadingButton content="Updating" />
+              )}
             </div>
           </div>
         </div>
