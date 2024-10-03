@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import UpdateProfile from "./UpdateProfile";
 import Profile from "./Profile";
 import UpdatePassword from "./UpdatePassword";
+import SideLink from "../SideLink";
 
 const Account = () => {
+  const linkArr = ["Profile", "Update Profile", "Update Password"];
   const [selectedComponent, setSelectedComponent] = useState("Profile");
   return (
     <>
@@ -17,55 +18,28 @@ const Account = () => {
             className="grid gap-4 text-sm text-muted-foreground"
             // x-chunk="dashboard-04-chunk-0"
           >
-            {/* try to add this in component */}
-            <Link
-              href="#"
-              className={
-                selectedComponent === "Profile"
-                  ? "font-semibold text-primary"
-                  : ""
-              }
-              onClick={() => setSelectedComponent("Profile")}
-            >
-              Profile
-            </Link>
-
-            <Link
-              href="#"
-              className={
-                selectedComponent === "Update Profile"
-                  ? "font-semibold text-primary"
-                  : ""
-              }
-              onClick={() => setSelectedComponent("Update Profile")}
-            >
-              Update Profile
-            </Link>
-
-            <Link
-              href="#"
-              className={
-                selectedComponent === "Update Password"
-                  ? "font-semibold text-primary"
-                  : ""
-              }
-              onClick={() => setSelectedComponent("Update Password")}
-            >
-              Update Password
-            </Link>
+            {linkArr.map((ele) => (
+              <SideLink
+                key={ele}
+                redirectTo={"#"}
+                content={ele}
+                handleClick={() => setSelectedComponent(ele)}
+                selectedComponent={selectedComponent}
+              />
+            ))}
           </nav>
           <div className="grid gap-6">
             {(() => {
               switch (selectedComponent) {
-                case "Profile":
+                case linkArr[0]:
                   return <Profile />;
                   break;
 
-                case "Update Profile":
+                case linkArr[1]:
                   return <UpdateProfile />;
                   break;
 
-                case "Update Password":
+                case linkArr[2]:
                   return <UpdatePassword />;
                   break;
 

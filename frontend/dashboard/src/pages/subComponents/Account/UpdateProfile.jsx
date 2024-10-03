@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import SpecialLoadingButton from "./SpecialLoadingButton";
+import SpecialLoadingButton from "../SpecialLoadingButton";
 
 const UpdateProfile = () => {
   const { user, loading, error, isUpdated, message } = useSelector(

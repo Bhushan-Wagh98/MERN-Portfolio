@@ -277,3 +277,19 @@ modified code
                   <LogOut className="h-5 w-5" />
                   Logout
                 </Link> */}
+
+
+
+
+
+                {/* <Link
+              href="#"
+              className={
+                selectedComponent === "Profile"
+                  ? "font-semibold text-primary pointer-events-none"
+                  : ""
+              }
+              onClick={() => setSelectedComponent("Profile")}
+            >
+              Profile
+            </Link> */}

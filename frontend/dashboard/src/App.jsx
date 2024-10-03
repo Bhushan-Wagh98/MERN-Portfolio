@@ -15,7 +15,7 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/slices/userSlice";
-import Profile from "./pages/subComponents/Profile";
+import Profile from "./pages/subComponents/Account/Profile";
 
 function App() {
   const dispatch = useDispatch();

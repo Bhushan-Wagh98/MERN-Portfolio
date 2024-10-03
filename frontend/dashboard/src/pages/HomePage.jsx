@@ -26,13 +26,13 @@ import {
 import { Button } from "@/components/ui/button";
 import TooltipComp from "./subComponents/TooltipComp";
 import SidebarItems from "./subComponents/SidebarItems";
-import Dashboard from "./subComponents/Dashboard";
-import AddProject from "./subComponents/AddProject";
-import AddSkills from "./subComponents/AddSkills";
-import AddApplications from "./subComponents/AddApplications";
-import AddTimeline from "./subComponents/AddTimeline";
-import Messages from "./subComponents/Messages";
-import Account from "./subComponents/Account";
+import Dashboard from "./subComponents/Dashboard/Dashboard";
+import AddProject from "./subComponents/AddProjects/AddProject";
+import AddSkills from "./subComponents/AddSkills/AddSkills";
+import AddApplications from "./subComponents/AddApplications/AddApplications";
+import AddTimeline from "./subComponents/AddTimeline/AddTimeline";
+import Messages from "./subComponents/Messages/Messages";
+import Account from "./subComponents/Account/Account";
 
 const HomePage = () => {
   const [active, setActive] = useState("Dashboard");
