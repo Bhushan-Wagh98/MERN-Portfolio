@@ -35,7 +35,7 @@ import Messages from "./subComponents/Messages/Messages";
 import Account from "./subComponents/Account/Account";
 
 const HomePage = () => {
-  const [active, setActive] = useState("Dashboard");
+  const [active, setActive] = useState("Account");
   const { isAuthenticated, error, message, loading, user } = useSelector(
     (state) => state.user
   );

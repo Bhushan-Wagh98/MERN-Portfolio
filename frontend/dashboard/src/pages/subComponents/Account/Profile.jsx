@@ -2,7 +2,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -51,7 +50,11 @@ const Profile = () => {
             </div>
             <div className="grid gap-2">
               <Label>About me</Label>
-              <Textarea defaultValue={user?.aboutMe} disabled />
+              <Textarea
+                className="h-full min-h-[150px]"
+                defaultValue={user?.aboutMe}
+                disabled
+              />
             </div>
             <div className="grid gap-2">
               <Label>Portfolio URL</Label>

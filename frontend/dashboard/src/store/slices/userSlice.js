@@ -189,12 +189,12 @@ export const updatePassword =
     }
   };
 
-export const updateProfile = (data) => async (dispatch) => {
+export const updateProfile = (formData) => async (dispatch) => {
   dispatch(userSlice.actions.updateProfileRequest());
   try {
-    const { res } = await axios.put(
+    const { data } = await axios.put(
       "http://localhost:4000/api/v1/user/update/profile",
-      data,
+      formData,
       {
         withCredentials: true,
         headers: {
@@ -203,7 +203,7 @@ export const updateProfile = (data) => async (dispatch) => {
       }
     );
 
-    dispatch(userSlice.actions.updateProfileSuccess(res.message));
+    dispatch(userSlice.actions.updateProfileSuccess(data.message));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(

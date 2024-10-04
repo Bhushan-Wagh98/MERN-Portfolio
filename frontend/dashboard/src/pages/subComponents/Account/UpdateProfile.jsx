@@ -5,7 +5,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import SpecialLoadingButton from "../SpecialLoadingButton";
+import {
+  clearAllUserErrors,
+  getUser,
+  resetProfile,
+  updateProfile,
+} from "../../../store/slices/userSlice";
 
 const UpdateProfile = () => {
   const { user, loading, error, isUpdated, message } = useSelector(
@@ -52,22 +59,37 @@ const UpdateProfile = () => {
   };
 
   const handleUpdate = () => {
-    console.log("clicked");
+    const formData = new FormData();
+    formData.append("fullName", fullName?.trim());
+    formData.append("email", email?.trim()?.toLowerCase());
+    formData.append("phone", phone?.trim());
+    formData.append("aboutMe", aboutMe?.trim());
+    formData.append("portfolioURL", portfolioURL?.trim());
+    formData.append("linkedInURL", linkedInURL?.trim());
+    formData.append("githubURL", githubURL?.trim());
+    formData.append("instaURL", instagramURL?.trim());
+    formData.append("fbURL", fbURL?.trim());
+    formData.append("twitterURL", twitterURL?.trim());
+    formData.append("hackerRankURL", hackerRankURL?.trim());
+    formData.append("avatar", avatar);
+    formData.append("resume", resume);
+
+    dispatch(updateProfile(formData));
   };
 
   useEffect(() => {
     if (
-      fullName === user.fullName &&
-      email === user.email &&
-      phone === user.phone &&
-      aboutMe === user.aboutMe &&
-      portfolioURL === user.portfolioURL &&
-      linkedInURL === user.linkedInURL &&
-      githubURL === user.githubURL &&
-      instagramURL === user.instaURL &&
-      fbURL === user.fbURL &&
-      twitterURL === user.twitterURL &&
-      hackerRankURL === user.hackerRankURL &&
+      fullName?.trim() === user.fullName &&
+      email?.trim().toLowerCase() === user.email &&
+      phone?.trim().toLowerCase() === user.phone &&
+      aboutMe?.trim() === user.aboutMe &&
+      portfolioURL?.trim() === user.portfolioURL &&
+      linkedInURL?.trim() === user.linkedInURL &&
+      githubURL?.trim() === user.githubURL &&
+      instagramURL?.trim() === user.instaURL &&
+      fbURL?.trim() === user.fbURL &&
+      twitterURL?.trim() === user.twitterURL &&
+      hackerRankURL?.trim() === user.hackerRankURL &&
       avatar === user.avatar.url &&
       resume === user.resume.url
     ) {
@@ -90,6 +112,22 @@ const UpdateProfile = () => {
     avatar,
     resume,
   ]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearAllUserErrors());
+    }
+
+    if (isUpdated) {
+      dispatch(getUser());
+      dispatch(resetProfile());
+    }
+
+    if (message) {
+      toast.success(message);
+    }
+  }, [dispatch, loading, error, isUpdated]);
 
   return (
     <>
@@ -163,6 +201,7 @@ const UpdateProfile = () => {
             <div className="grid gap-2">
               <Label>About me</Label>
               <Textarea
+                className="h-full min-h-[150px]"
                 value={aboutMe}
                 onChange={(e) => setAboutMe(e.target.value)}
                 placeholder="About you"
