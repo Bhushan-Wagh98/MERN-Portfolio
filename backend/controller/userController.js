@@ -221,7 +221,7 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (currentPassword === newPassword) {
-    return ErrorHandler("New password is same as old password!", 500);
+    return next(new ErrorHandler("New password is same as old password!", 500));
   }
 
   user.password = newPassword;

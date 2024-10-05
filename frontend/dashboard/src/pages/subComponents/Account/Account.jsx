@@ -6,7 +6,7 @@ import SideLink from "../SideLink";
 
 const Account = () => {
   const linkArr = ["Profile", "Update Profile", "Update Password"];
-  const [selectedComponent, setSelectedComponent] = useState(linkArr[1]);
+  const [selectedComponent, setSelectedComponent] = useState(linkArr[2]);
 
   return (
     <>

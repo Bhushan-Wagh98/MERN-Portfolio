@@ -183,8 +183,8 @@ export const updatePassword =
       dispatch.userSlice.actions.updatePasswordSuccess(data.message);
       dispatch.userSlice.actions.clearAllErrors();
     } catch (error) {
-      dispatch.userSlice.actions.updatePasswordFailed(
-        error.response.data.message
+      dispatch(
+        userSlice.actions.updatePasswordFailed(error.response.data.message)
       );
     }
   };
